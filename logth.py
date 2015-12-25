@@ -2,7 +2,7 @@ from math import log10
 
 
 def ltable():
-    # let us create header
+    '''Creates standard log tables'''
     hdr = 'log \t'
     for hd in range(0, 10):
         hdr += repr(hd) + '\t'

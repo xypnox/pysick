@@ -1,3 +1,18 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# This is the classic four in a row game by                                 #
+
+#      █████  ██████  ██ ██    ██ ██   ████████ ██████   █████
+#    ██   ██ ██   ██ ██ ██    ██ ██      ██    ██   ██ ██   ██
+#   ███████ ██   ██ ██ ██    ██ ██      ██    ██████  ███████
+#  ██   ██ ██   ██ ██ ██    ██ ██      ██    ██   ██ ██   ██
+# ██   ██ ██████  ██  ██████  ███████ ██    ██   ██ ██   ██
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#               TODO
+#            [ ] Create AI
+#            [ ] Document the project
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 import os
 import time
 from random import randint
@@ -17,11 +32,18 @@ surface = [
 # co-ordinates for insertion
 coords = [0, 0, 0, 0, 0, 0, 0]
 
+# counter for alternative moves
+count = 0
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                           The display fxn                                 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 def display():
+    """
+    Display the Surface of
+    """
     # display fxn
     print('  0   1   2   3   4   5   6')
     for i in range(0, 7):
@@ -32,10 +54,17 @@ def display():
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#                           The Win checking Fxn                            #
+#                           The Win checking fxn                            #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
 def win():
+    """
+    Winning condition checking function
+
+    This checks for rows coloumns and diagonals for
+    similar value for winning
+    """
     a = False
 
     # check row - win
@@ -75,100 +104,124 @@ def win():
 
 
 def playai():
-    display()
-    a = int(input("Move :"))
+    """
+    Low Artificial Inteligence function
 
-    if -1 < a < 7:
-        insert(a, count)
-        count += 1
-
-    if a == 10:
-        break
-
-    if a == 11:
-        surface = [
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ']
-        ]
+    This simulates simple randomly selected moves so the player
+    can feel easy to win
+    """
+    count = 0
+    while True:
         coords = [0, 0, 0, 0, 0, 0, 0]
-
-    if win():
-        os.system("clear")
-        if count % 2 == 0:
-            print("Mr. O wins")
-        else:
-            print("Mr. X wins")
         display()
-        surface = [
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ']
-        ]
-        coords = [0, 0, 0, 0, 0, 0, 0]
-        print("Restarting Game in 10 seconds")
-        time.sleep(10)
+
+        if count % 2 == 0:
+            a = int(input("Move :"))
+            if -1 < a < 7:
+                insert(a, count)
+                count += 1
+
+        inpt = 1
+        while inpt:
+            if count % 2 == 1:
+                er = randint(0, 6)
+                if coords[er] < 7:
+                    insert(er, count)
+                    inpt = 0
+                    count += 1
+
+        if a == 10:
+            break
+
+        if a == 11:
+            surface = [
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
+            coords = [0, 0, 0, 0, 0, 0, 0]
+
+        if win():
+            os.system("clear")
+            if count % 2 == 0:
+                print("Mr. Computer wins")
+            else:
+                print("Mr. Player wins")
+            display()
+            surface = [
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
+            coords = [0, 0, 0, 0, 0, 0, 0]
+            print("Restarting Game in 10 seconds")
+            time.sleep(10)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                           The 2 player game                               #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
 def play2():
-    display()
-    a = int(input("Move :"))
-
-    if -1 < a < 7:
-        insert(a, count)
-        count += 1
-
-    if a == 10:
-        break
-
-    if a == 11:
-        surface = [
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ']
-        ]
-        coords = [0, 0, 0, 0, 0, 0, 0]
-
-    if win():
-        os.system("clear")
-        if count % 2 == 0:
-            print("Mr. O wins")
-        else:
-            print("Mr. X wins")
+    count = 0
+    coords = [0, 0, 0, 0, 0, 0, 0]
+    while True:
         display()
-        surface = [
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ', ' ']
-        ]
-        coords = [0, 0, 0, 0, 0, 0, 0]
-        print("Restarting Game in 10 seconds")
-        time.sleep(10)
+        a = int(input("Move :"))
+
+        if -1 < a < 7:
+            insert(a, count)
+            count += 1
+
+        if a == 10:
+            break
+
+        if a == 11:
+            surface = [
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
+            coords = [0, 0, 0, 0, 0, 0, 0]
+
+        if win():
+            os.system("clear")
+            if count % 2 == 0:
+                print("Mr. O wins")
+            else:
+                print("Mr. X wins")
+            display()
+            surface = [
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
+            coords = [0, 0, 0, 0, 0, 0, 0]
+            print("Restarting Game in 10 seconds")
+            time.sleep(10)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#                            The Insert Fxn                                 #
+#                            The Insert fxn                                 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 
 def insert(x, count):
     # fxn for insertion
@@ -183,18 +236,17 @@ def insert(x, count):
         print("Invalid Input")
 
 
-# counter for alternative moves
-count = 0
-choice = input("Enter game mode")
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                           The main game loop                              #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+
 while True:
-    choice = input("Enter game mode : ")
+    choice = int(input("Enter game mode : "))
     os.system("clear")
     if choice == 1:
         play2()
     elif choice == 2:
         playai()
+    elif choice == 3:
+        break
