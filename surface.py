@@ -90,7 +90,7 @@ class surface:
     def comp(self, iterations, direction):
         if direction == "across":
             incX, incY = 0, 1
-            rangeX, rangeY = len(self.surf), self.surf[0] - iterations
+            rangeX, rangeY = len(self.surf), len(self.surf[0]) - iterations
         for x in range(rangeX):
             for y in range(rangeY):
                 if self.surf[x][y] != self.popString:
