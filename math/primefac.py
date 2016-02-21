@@ -29,29 +29,6 @@ def is_prime(x):
 # this loop simply runs the fxn to add newer primes
 for i in range(2, 10000):
     is_prime(i)
-    print("p>", i)
 
-k = 0
-
-for i in range(10000):
-    if i not in primes:
-        if i % 2 == 1:
-            print(i)
-            num = 0
-            for x in primes:
-                if x < i:
-                    num = x
-                    for j in range(1, i):
-                        num = num + 2 * (j ** 2)
-                        if num == i:
-                            k = 0
-                            break
-                        else:
-                            k = 1
-                            num = x
-                else:
-                    break
-            if k == 1:
-                print("ans=>", i)
-    if k == 1:
-        break
+for j in primes:
+    print(j)
