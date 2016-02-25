@@ -18,6 +18,9 @@ keyvars = ['0', '1', '2', '3', '4', '5', '6']
 
 
 class encrypt():
+    """Encrypt class:
+    This class
+    """
 
     def __init__(self, str):
         self.string = str
@@ -35,16 +38,23 @@ class encrypt():
         newstring = ""
 
         for letter in self.string:
+
             if letter in char:
                 index = char.index(letter) + counter
+
                 if index > 25:
                     index = index - 26
+
                 letter = char[index]
+
             elif letter in Char:
                 index = Char.index(letter) + counter
+
                 if index > 25:
                     index = index - 26
+
                 letter = Char[index]
+
             newstring += letter
 
         self.string = newstring
@@ -54,19 +64,26 @@ class encrypt():
 
     def reverseWord(self):
         newstring = ""
+
         for word in self.string.split(" "):
             newstring += word[::-1]
             newstring += " "
+
         self.string = newstring[:-1]
 
     def countReverse(self):
         newstring = ""
+
         for letter in self.string:
+
             if letter in char:
                 letter = char[25 - char.index(letter)]
+
             elif letter in Char:
                 letter = Char[25 - Char.index(letter)]
+
             newstring += letter
+
         self.string = newstring
 
     def execute(self, key):
@@ -89,12 +106,16 @@ class encrypt():
     def encrypt(self):
         print("\nWanna a Personalized Key?")
         choice = input("yope/nope : ")
+
         if choice == "yope" or choice == "y" or choice == "yes":
             self.key = input("\nEnter that dizzle of a key : ")
+
         else:
             length = int(input("\nLength o' key you can put 'n ur brain: "))
             self.key = self.keyGenerator(length)
+
         self.execute(self.key)
+
         print("\n3ncrypt3d str!ng !z :", self.string)
         print("\nk3y 2 un10c|< !z :", self.key, '\n')
 
@@ -111,16 +132,19 @@ class decrypt(encrypt):
         newstring = ""
 
         for letter in self.string:
+
             if letter in char:
                 index = char.index(letter) - counter
                 if index > 25:
                     index = index - 26
                 letter = char[index]
+
             elif letter in Char:
                 index = Char.index(letter) - counter
                 if index > 25:
                     index = index - 26
                 letter = Char[index]
+
             newstring += letter
 
         self.string = newstring
@@ -134,9 +158,11 @@ class decrypt(encrypt):
 if __name__ == "__main__":
     system("clear")
     choice = input("\nWanna Encrypt or Decrypt : (e/d) : ")
+
     if choice == 'e':
         inst = encrypt(input("\nEnter Your String : "))
         inst.encrypt()
+
     elif choice == 'd':
         inst = decrypt(input("\nEnter Your String : "))
         inst.decrypt()
