@@ -19,7 +19,7 @@ keyvars = ['0', '1', '2', '3', '4', '5', '6']
 
 class encrypt():
     """Encrypt class:
-    This class
+    This class encrypts the
     """
 
     def __init__(self, str):
