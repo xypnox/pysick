@@ -17,9 +17,14 @@ Char = [
 keyvars = ['0', '1', '2', '3', '4', '5', '6']
 
 
-class encrypt():
-    """Encrypt class:
-    This class encrypts the
+class encrypt:
+    """
+    Encrypt class:
+    This class encrypts the string passed to it using functions declared within
+    It contains :
+        keyGenerator fxn to generate random keys
+        differnet encryption fxns to glibber the text
+        encrypt function to initiate encryption
     """
 
     def __init__(self, str):
