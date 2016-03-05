@@ -130,16 +130,29 @@ runs_pakistan = data(
     [2, 4, 5, 6, 4, 3, 1, 5, 0, 6, 3, 5, 3, 4, 3, 5, 2, 4, 2, 4]
 )
 
-print('India')
-runs_india.display()
-print('mean =', runs_india.average())
-print('deviation =', runs_india.deviation())
-print('variance =', runs_india.variance())
-print('Standard Deviation =', runs_india.standardDeviation())
+# print('India')
+# runs_india.display()
+# print('mean =', runs_india.average())
+# print('deviation =', runs_india.deviation())
+# print('variance =', runs_india.variance())
+# print('Standard Deviation =', runs_india.standardDeviation())
+#
+# print('\nPakistan')
+# runs_pakistan.display()
+# print('mean =', runs_pakistan.average())
+# print('deviation =', runs_pakistan.deviation())
+# print('variance =', runs_pakistan.variance())
+# print('Standard Deviation =', runs_pakistan.standardDeviation())
 
-print('\nPakistan')
-runs_pakistan.display()
-print('mean =', runs_pakistan.average())
-print('deviation =', runs_pakistan.deviation())
-print('variance =', runs_pakistan.variance())
-print('Standard Deviation =', runs_pakistan.standardDeviation())
+seconds = data(
+    'raw',
+    [
+        0.06461501121520996, 0.029305219650268555,
+        0.06949782371520996, 0.058414459228515625,
+        0.029052734375, 0.06666922569274902,
+        0.05664515495300293, 0.12762832641601562,
+        0.02924799919128418, 0.09052062034606934
+    ]
+)
+
+print(seconds.average())
