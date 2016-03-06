@@ -14,10 +14,15 @@ class data:
         obj.organize(height)
             Organize the data passed into class intervals
     """
-    def __init__(self, kind, data=0, freq=0):
+    def __init__(self, kind, data=[], freq=[]):
         if kind == 'raw':
             self.raw = data
             self.kind = kind
+
+        elif kind == 'table' or kind == 'tbl':
+            self.elements = data
+            self.freq = freq
+            self.kind = 'table'
 
         elif kind == "continuous" or kind == "cont":  # cont is only for ease
             self.limits = data  # upper and lower limits
@@ -36,6 +41,10 @@ class data:
         elif self.kind == "continuous" or self.kind == 'discrete':
             for i in range(len(self.freq)):
                 print(self.limits[i], ' \t', self.freq[i])
+
+        elif self.kind == 'table':
+            for i in range(len(self.freq)):
+                print(self.elements[i], '\t', self.freq[i])
 
     def average(self):
         if self.kind == 'raw':
@@ -104,6 +113,58 @@ class data:
                 self.freq = freq
                 self.kind = 'continuous'
 
+    def tabulate(self):
+        if self.kind == 'raw':
+            self.freq = []
+            self.elements = []
+            k = 1
+            self.raw.sort()
+            for i in self.raw:
+                if i not in self.elements:
+                    self.freq.append(k)
+                    self.elements.append(i)
+                    k = 1
+                else:
+                    k += 1
+            self.kind = 'table'
+
+runs_india = data(
+    'raw',
+    [2, 4, 3, 6, 8, 13, 7, 8, 20, 5, 6, 14, 8, 9, 4, 13, 8, 22, 4, 1]
+)
+
+runs_pakistan = data(
+    'raw',
+    [2, 4, 5, 6, 4, 3, 1, 5, 0, 6, 3, 5, 3, 4, 3, 5, 2, 4, 2, 4]
+)
+
+runs_india.tabulate()
+runs_india.display()
+
+# print('India')
+# runs_india.display()
+# print('mean =', runs_india.average())
+# print('deviation =', runs_india.deviation())
+# print('variance =', runs_india.variance())
+# print('Standard Deviation =', runs_india.standardDeviation())
+#
+# print('\nPakistan')
+# runs_pakistan.display()
+# print('mean =', runs_pakistan.average())
+# print('deviation =', runs_pakistan.deviation())
+# print('variance =', runs_pakistan.variance())
+# print('Standard Deviation =', runs_pakistan.standardDeviation())
+# seconds = data(
+#     'raw',
+#     [
+#         0.06461501121520996, 0.029305219650268555,
+#         0.06949782371520996, 0.058414459228515625,
+#         0.029052734375, 0.06666922569274902,
+#         0.05664515495300293, 0.12762832641601562,
+#         0.02924799919128418, 0.09052062034606934
+#     ]
+# )
+# print(seconds.average())
 # tests
 # marks = data(
 #     'dsc',
@@ -119,40 +180,3 @@ class data:
 #     ],
 #     [2, 4, 6, 5, 3]
 # )
-
-runs_india = data(
-    'raw',
-    [2, 4, 3, 6, 8, 13, 7, 8, 20, 5, 6, 14, 8, 9, 4, 13, 8, 22, 4, 1]
-)
-
-runs_pakistan = data(
-    'raw',
-    [2, 4, 5, 6, 4, 3, 1, 5, 0, 6, 3, 5, 3, 4, 3, 5, 2, 4, 2, 4]
-)
-
-# print('India')
-# runs_india.display()
-# print('mean =', runs_india.average())
-# print('deviation =', runs_india.deviation())
-# print('variance =', runs_india.variance())
-# print('Standard Deviation =', runs_india.standardDeviation())
-#
-# print('\nPakistan')
-# runs_pakistan.display()
-# print('mean =', runs_pakistan.average())
-# print('deviation =', runs_pakistan.deviation())
-# print('variance =', runs_pakistan.variance())
-# print('Standard Deviation =', runs_pakistan.standardDeviation())
-
-seconds = data(
-    'raw',
-    [
-        0.06461501121520996, 0.029305219650268555,
-        0.06949782371520996, 0.058414459228515625,
-        0.029052734375, 0.06666922569274902,
-        0.05664515495300293, 0.12762832641601562,
-        0.02924799919128418, 0.09052062034606934
-    ]
-)
-
-print(seconds.average())
