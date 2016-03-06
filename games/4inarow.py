@@ -71,28 +71,32 @@ def win():
     for i in range(7):
         for j in range(4):
             if surface[i][j] == "X" or surface[i][j] == "O":
-                if surface[i][j] == surface[i][j + 1] == surface[i][j + 2] == surface[i][j + 3]:
+                if surface[i][j] == surface[i][j + 1] == surface[i][j + 2] \
+                        == surface[i][j + 3]:
                     a = True
 
     # check coloumn | win
     for i in range(4):
         for j in range(7):
             if surface[i][j] == "X" or surface[i][j] == "O":
-                if surface[i][j] == surface[i + 1][j] == surface[i + 2][j] == surface[i + 3][j]:
+                if surface[i][j] == surface[i + 1][j] == surface[i + 2][j] \
+                        == surface[i + 3][j]:
                     a = True
 
     # check diagonal / win
     for i in range(4):
         for j in range(4):
             if surface[i][j] == "X" or surface[i][j] == "O":
-                if surface[i][j] == surface[i + 1][j + 1] == surface[i + 2][j + 2] == surface[i + 3][j + 3]:
+                if surface[i][j] == surface[i + 1][j + 1] \
+                        == surface[i + 2][j + 2] == surface[i + 3][j + 3]:
                     a = True
 
     # check diagonal \ win
     for i in range(4):
         for j in range(3, 7):
             if surface[i][j] == "X" or surface[i][j] == "O":
-                if surface[i][j] == surface[i + 1][j - 1] == surface[i + 2][j - 2] == surface[i + 3][j - 3]:
+                if surface[i][j] == surface[i + 1][j - 1] \
+                        == surface[i + 2][j - 2] == surface[i + 3][j - 3]:
                     a = True
 
     return a

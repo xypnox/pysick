@@ -147,7 +147,6 @@ runs_india.display()
 # print('deviation =', runs_india.deviation())
 # print('variance =', runs_india.variance())
 # print('Standard Deviation =', runs_india.standardDeviation())
-#
 # print('\nPakistan')
 # runs_pakistan.display()
 # print('mean =', runs_pakistan.average())
