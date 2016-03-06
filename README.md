@@ -29,9 +29,16 @@ It finds primes till 10,000 in just: `0.06215965747833252` seconds i.e. 6 millis
 This simple module, or file contains data class which stores data and can apply various stats methods on it. It is capable of classifying data into intervals.
 
 ## Enigma
-This
+
+This is the crazy python script for encrypting/decrypting some text. It can generate a key for you or you can manually enter one.
 
 ---
+
+## TODO :pencil:
+
+* [ ] improve stats.py
+* [ ] complete surface.py
+* [ ] add file encryption in enigma
 
 By [Aditya](http://adiultra.cf)
 Don't forget to check my [blag](http://adilnx.tk).

@@ -117,15 +117,15 @@ class data:
         if self.kind == 'raw':
             self.freq = []
             self.elements = []
-            k = 1
+            f = 1  # frequency of a single element
             self.raw.sort()
             for i in self.raw:
                 if i not in self.elements:
-                    self.freq.append(k)
+                    self.freq.append(f)
                     self.elements.append(i)
-                    k = 1
+                    f = 1
                 else:
-                    k += 1
+                    f += 1
             self.kind = 'table'
 
 runs_india = data(
