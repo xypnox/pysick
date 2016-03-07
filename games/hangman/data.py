@@ -76,5 +76,6 @@ hangman = [
 
 dictionary = [
     'linux', 'gnu', 'gimp', 'inkscape', 'python', 'gnome',
-    'kde', 'ubuntu'
+    'kde', 'ubuntu', 'firefox', 'suse', 'tux', 'rythmbox',
+    'vim', 'emacs', 'gdebi', 'mate', 'nautilus'
 ]
