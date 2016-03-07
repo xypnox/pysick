@@ -1,4 +1,4 @@
-# PySick
+# PySick :snake:
 
 >So Sick of Python
 
