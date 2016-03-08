@@ -156,6 +156,7 @@ def playai():
             else:
                 print("Mr. Player wins")
             display()
+            global surface, coords
             surface = [
                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -208,6 +209,7 @@ def play2():
             else:
                 print("Mr. X wins")
             display()
+            global surface, coords
             surface = [
                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],
                 [' ', ' ', ' ', ' ', ' ', ' ', ' '],

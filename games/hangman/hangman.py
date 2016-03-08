@@ -18,6 +18,8 @@ def start():
         print(figure)
         sleep(0.4)
 
+    os.system('clear')
+
 
 def display(condition, letters, tletters):
     """
@@ -25,7 +27,7 @@ def display(condition, letters, tletters):
     """
     os.system('clear')
 
-    print(data.hangman[condition])
+    print(data.hangman[5-condition])
 
     print('The clues are = ', end='\t')
     for l in letters:
