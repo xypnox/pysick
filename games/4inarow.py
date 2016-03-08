@@ -246,13 +246,13 @@ def insert(x, count):
 #                           The main game loop                              #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-
-while True:
-    choice = int(input("Enter game mode : "))
-    os.system("clear")
-    if choice == 1:
-        play2()
-    elif choice == 2:
-        playai()
-    elif choice == 3:
-        break
+if __name__ == "__main__":
+    while True:
+        choice = int(input("Enter game mode : "))
+        os.system("clear")
+        if choice == 1:
+            play2()
+        elif choice == 2:
+            playai()
+        elif choice == 3:
+            break

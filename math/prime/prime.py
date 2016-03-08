@@ -26,14 +26,15 @@ def is_prime(x):
 
     return a
 
-# this loop simply runs the fxn to add newer primes
-for i in range(2, int(input('Till where primes =]'))):
-    is_prime(i)
+if __name__ == "__main__":
+    # this loop simply runs the fxn to add newer primes
+    for i in range(2, int(input('Till where primes =]'))):
+        is_prime(i)
 
-# the output loop
-for i in range(len(primes)):
-    print(primes[i], end='\t')
-    if (i + 1) % 10 == 0:
-        print()
+    # the output loop
+    for i in range(len(primes)):
+        print(primes[i], end='\t')
+        if (i + 1) % 10 == 0:
+            print()
 
-print()  # simple newline
+    print()  # simple newline

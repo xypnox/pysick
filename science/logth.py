@@ -48,4 +48,5 @@ def ltable():
     # thnx message
     print('\t <<The log program by cool Adi>>')
 
-ltable()
+if __name__ == "__main__":
+    ltable()
