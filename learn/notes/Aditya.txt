@@ -1,3 +1,0 @@
-Aditya
-['yum']
-is cool
