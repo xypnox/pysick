@@ -32,13 +32,17 @@ class goBoard:
                 print(self.board[i][j], end=ends)
             print()
 
-    def move(self, i, j):
-        self.board[i][j] = 'X' if self.moves % 2 == 0 else 'O'
-        self.moves += 1
+    def move(self, c):  # c -> coordinates
+        try:
+            c[0], c[1] = int(c[0]), int(c[1])
+            self.board[c[0]][c[1]] = 'X' if self.moves % 2 == 0 else 'O'
+            self.moves += 1
+        except IndexError:
+            print('invalids : executing `rm -rf /`')
+
 
 if __name__ == "__main__":
-    go = goBoard(19)
-    go.display()
+    go = goBoard(9)
     while True:
-        go.move(input("i : "), input("j : "))
         go.display()
+        go.move(input("Coords : ").split(' '))
