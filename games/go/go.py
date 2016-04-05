@@ -1,5 +1,6 @@
 class goBoard:
     """docstring for goBoard"""
+
     def __init__(self, dimension):
         self.dimension = dimension
         self.board = []
@@ -8,7 +9,7 @@ class goBoard:
 
     def generateBoard(self, x, defvar):
         'generateBoard fxn to generate the board with +\'s'
-        self.defvar = '+'
+        self.defvar = '+'  # default variable -> used as a filler
         for i in range(x):
             line = []
             for j in range(x):
@@ -46,7 +47,8 @@ class goBoard:
 
     def isAlive(self, i, j):
         if self.board[i][j] != self.defvar:
-            if 0 < i < 8 and 0 < j < 8:
+
+            if 0 < i < self.defvar and 0 < j < self.defvar:
                 if (
                     self.board[i+1][j] == self.defvar or
                     self.board[i][j+1] == self.defvar or
@@ -54,56 +56,68 @@ class goBoard:
                     self.board[i][j-1] == self.defvar
                 ):
                     return True
+
             elif i == 0:
+
                 if j == 0:
                     if (
                         self.board[i+1][j] == self.defvar or
                         self.board[i][j+1] == self.defvar
                     ):
                         return True
-                elif 0 < j < 8:
+
+                elif 0 < j < self.defvar:
                     if (
                         self.board[i+1][j] == self.defvar or
                         self.board[i][j+1] == self.defvar or
                         self.board[i][j-1] == self.defvar
                     ):
                         return True
-                elif j == 8:
+
+                elif j == self.defvar:
                     if (
                         self.board[i][j-1] == self.defvar or
                         self.board[i+1][j] == self.defvar
                     ):
                         return True
-            elif i == 8:
+
+            elif i == self.defvar:
+
                 if j == 0:
                     if (
                         self.board[i-1][j] == self.defvar or
                         self.board[i][j+1] == self.defvar
                     ):
                         return True
-                elif 0 < j < 8:
+
+                elif 0 < j < self.defvar:
                     if (
                         self.board[i-1][j] == self.defvar or
                         self.board[i][j+1] == self.defvar or
                         self.board[i][j-1] == self.defvar
                     ):
                         return True
-                elif j == 8:
+
+                elif j == self.defvar:
                     if (
                         self.board[i][j-1] == self.defvar or
                         self.board[i-1][j] == self.defvar
                     ):
                         return True
+
             elif j == 0:
-                if 0 < i < 8:
+
+                if 0 < i < self.defvar:
                     if (
                         self.board[i+1][j] == self.defvar or
                         self.board[i-1][j] == self.defvar or
                         self.board[i][j+1] == self.defvar
                     ):
                         return True
-            elif j == 8:
-                if 0 < i < 8:
+
+            elif j == self.defvar:
+
+                if 0 < i < self.defvar:
                     if (
                         self.board[i-1][j] == self.defvar or
                         self.board[i+1][j] == self.defvar or
@@ -111,11 +125,33 @@ class goBoard:
                     ):
                         return True
 
+    def checkBoard(self):
+        'Fxn to check after every move ifany piece has died'
+        alive = []  # list to collect coords of live pieces
+        dead = []   # similar to alive to collect dead pieces
+
+        for i in range(self.defvar):
+            for j in range(self.defvar):
+                if [i, j] not in alive+dead:
+
+                    if(self.isAlive(i, j)):
+                        alive.append([i, j])
+
+                    else:
+                        dead.append([i, j])
+        self.killDead()
+
+    def killDead(self, dead):
+        'fxn to Remove Dead pieces off the board(actually replace with defvar)'
+        for coord in dead:
+            self.board[coord[0]][coord[1]] == self.defvar
+
 # Main Execution like function
 if __name__ == "__main__":
     go = goBoard(9)
     while True:
         go.display()
         go.move(input("Coords : ").split(' '))
+
         if go.isAlive(2, 1):
             print('Alive')
