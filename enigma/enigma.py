@@ -27,12 +27,13 @@ class encrypt:
         encrypt function to initiate encryption
     """
 
-    def __init__(self, str):
+    def __init__(self, str='Default Cool string'):
         self.string = str
         self.stringOrignal = str
         self.key = 0
 
     def keyGenerator(self, length):
+        'Generate a random Key for a given length'
         key = ""
         while length > 0:
             key += random.choice(keyvars)
@@ -40,6 +41,14 @@ class encrypt:
         return key
 
     def increase(self, counter=1):
+        '''
+        Increase the letters specified by the count
+            ex:
+            for count => 2
+                a->c
+                f->h
+                z->b
+        '''
         newstring = ""
 
         for letter in self.string:
@@ -65,9 +74,11 @@ class encrypt:
         self.string = newstring
 
     def reverse(self):
+        'Reverse the string ex: "Hello World!"->"!dlroW olleH"'
         self.string = self.string[::-1]
 
     def reverseWord(self):
+        'Reverse the Words in string ex: "hello to king"->"olleh ot gnik"'
         newstring = ""
 
         for word in self.string.split(" "):
@@ -77,6 +88,7 @@ class encrypt:
         self.string = newstring[:-1]
 
     def countReverse(self):
+        'Reverse the alphabets ex: a->z c->x y->b'
         newstring = ""
 
         for letter in self.string:
@@ -92,6 +104,7 @@ class encrypt:
         self.string = newstring
 
     def execute(self, key):
+        'Execute commands for the key'
         for letter in key:
             if letter == '0':
                 self.increase()
@@ -108,7 +121,8 @@ class encrypt:
             elif letter == '6':
                 self.countReverse()
 
-    def encrypt(self):
+    def encryptCLI(self):
+        'Command line interface for encrypting string'
         print("\nWanna a Personalized Key?")
         choice = input("yope/nope : ")
 
@@ -134,6 +148,7 @@ class decrypt(encrypt):
     """
 
     def increase(self, counter=1):
+        'Reverse fxn replacement for decrypt class it actually decreases'
         newstring = ""
 
         for letter in self.string:
@@ -154,7 +169,8 @@ class decrypt(encrypt):
 
         self.string = newstring
 
-    def decrypt(self):
+    def decryptCLI(self):
+        'Command line interface for decrypting string'
         self.key = input("\nEnter that key you nearly forgot : ")[::-1]
         self.execute(self.key)
         print("\nd3crypt3d string !z :", self.string, '\n')
@@ -166,8 +182,8 @@ if __name__ == "__main__":
 
     if choice == 'e':
         inst = encrypt(input("\nEnter Your String : "))
-        inst.encrypt()
+        inst.encryptCLI()
 
     elif choice == 'd':
         inst = decrypt(input("\nEnter Your String : "))
-        inst.decrypt()
+        inst.decryptCLI()

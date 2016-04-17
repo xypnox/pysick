@@ -34,10 +34,18 @@ class goBoard:
                 print(self.board[i][j], end=ends)
             print()
 
+    def canMove(self, i, j):
+        if self.board[i][j] == self.defvar:
+            self.board[i][j] == 't'
+            if self.isAlive(i, j):
+                return True
+            else:
+                self.board[i][j] = self.defvar
+
     def move(self, c):  # c -> coordinates
         try:
             c[0], c[1] = int(c[0]), int(c[1])
-            if self.board[c[0]][c[1]] == self.defvar:
+            if self.canMove(c[0], c[1]):
                 self.board[c[0]][c[1]] = 'X' if self.moves % 2 == 0 else 'O'
                 self.moves += 1
             else:
@@ -46,6 +54,7 @@ class goBoard:
             print('invalids : executing `rm -rf /`')
 
     def isAlive(self, i, j):
+        'Fxn To check wether a piece is alive or not'
         if self.board[i][j] != self.defvar:
 
             if 0 < i < self.defvar and 0 < j < self.defvar:
