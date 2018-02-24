@@ -15,6 +15,7 @@ class point:
         dist = ((self.x - p.x)**2 + (self.y - p.y)**2)**(1/2)
         return dist
 
+
 me = point(3, 4)
 you = point(0, 0)
 

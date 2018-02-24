@@ -49,9 +49,9 @@ def display(condition, letters, tletters):
 def addletter(word, array, letter):
     i = 0
 
-    for l in word:
+    for ltr in word:
 
-        if l == letter:
+        if ltr == letter:
             array[i] = letter
 
         i += 1
@@ -103,6 +103,7 @@ def play():
 
     else:
         print('\nYou lost, The correct word is', randomword)
+
 
 if __name__ == "__main__":
     start()
