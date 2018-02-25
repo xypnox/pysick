@@ -96,6 +96,7 @@ def time_bit():
 
     return bit_list
 
+
 if __name__ == "__main__":
 
     for arg in sys.argv[1:]:

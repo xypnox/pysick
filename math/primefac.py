@@ -28,7 +28,7 @@ def is_prime(x):
 
 
 # this loop simply runs the fxn to add newer primes
-for i in range(2, 10000000):
+for i in range(2, 100000):
     is_prime(i)
 
 for j in primes:
