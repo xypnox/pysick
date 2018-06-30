@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+projects/telegram/telegram_config.py
+projects/telegram/*.mp3
+projects/telegram/*.session
