@@ -79,7 +79,7 @@ client.send_message('evi1haxor', "This is a telethon test")
 for entry in tgconf.chats:
     chat = client.get_entity(entry)
 
-    download_path = '/home/xypnox/Downloads/' + chat.title + '/'
+    download_path = os.path.expanduser('~') + '/Downloads/' + chat.title + '/'
 
     if not os.path.exists(download_path):
         os.makedirs(download_path)
