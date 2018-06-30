@@ -3,4 +3,4 @@ app_id = 000000
 api_hash = "xxxxxxxxxxxxxxxxxxxxxxx"
 
 # This is your chanel from where you will download
-test_chat = 'https://t.me/durov'
+chats = ['https://t.me/joinchat/BSL7qw1GJyyqO8BpteZ8jA', 'durov']
