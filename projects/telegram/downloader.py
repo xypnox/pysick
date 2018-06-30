@@ -46,35 +46,58 @@ client.send_message('evi1haxor', "This is a telethon test")
 #     print(dialog.name, dialog.draft.text)
 
 channel = client.get_entity(tgconf.test_channel)
-
 print(channel.title)
 
+download_path = '/home/xypnox/Downloads/' + channel.title + '/'
+
+if not os.path.exists(download_path):
+    os.makedirs(download_path)
+
+# Get messages
 msgs = client.get_messages(tgconf.test_channel, limit=100)
 
 count = 0
-# for msg in msgs.data:
-#     print(msg.id)
-#     if hasattr(msg, 'media'):
-#         count += 1
-#         print("Has media")
+
+for msg in msgs.data:
+    # print(msg.id)
+    if hasattr(msg, 'media') and msg.media is not None:
+        count += 1
+        # print("Has media")
 
 print("Total Messages with media = ", count)
 
-download_path = '/home/xypnox/Downloads/' + channel.title
-if not os.path.exists(download_path):
-    os.makedirs(download_path)
 # Download the most recent file
 # Recommended t install `cryptg` package to speedup downloads
-# msgs.data[0].download_media(download_path)
+answer = query_yes_no("Do you want to download the files?")
 
-for attribute in msgs.data[0].media.document.attributes:
-    if isinstance(attribute, types.DocumentAttributeFilename):
-        print(attribute.file_name)
-# answer = query_yes_no("Do you want to download the files?")
-# if answer is True:
-#     print("Downloading...")
-#     for msg in msgs.data:
-#         print(msg.id)
-#         if hasattr(msg, 'media'):
-#             msg.download_media()
+if answer is True:
+    print("Downloading...")
+    for msg in msgs.data:
+        if not hasattr(msg, 'media') or msg.media is None:
+            continue
+        elif msg.media is None:
+            continue
+
+        elif hasattr(msg.media, 'document'):
+            for attribute in msg.media.document.attributes:
+                if isinstance(attribute, types.DocumentAttributeFilename):
+                    file_name = download_path + attribute.file_name
+            if not os.path.isfile(file_name):
+                msg.download_media(file_name)
+                print(msg.id, " Downloaded as : ", file_name)
+            else:
+                print(msg.id, "Already Present")
+
+        elif hasattr(msg.media, 'photo'):
+            if len(msg.message) < 140 and len(msg.message) != 0:
+                file_name = download_path + "Photo-" + msg.message
+            else:
+                file_name = download_path + str(msg.media.photo.id)
+            if not os.path.isfile(file_name) and not os.path.isfile(file_name + ".jpg"):
+                msg.download_media(file_name)
+                print(msg.id, "Downloaded as : ", file_name)
+            else:
+                print(msg.id, "Already Present")
+
+print("Process complete Yo")
 client.disconnect()

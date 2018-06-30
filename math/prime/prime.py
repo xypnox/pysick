@@ -26,6 +26,7 @@ def is_prime(x):
 
     return a
 
+
 if __name__ == "__main__":
     # this loop simply runs the fxn to add newer primes
     for i in range(2, int(input('Till where primes =]'))):
