@@ -45,16 +45,16 @@ client.send_message('evi1haxor', "This is a telethon test")
 # for dialog in client.get_dialogs(limit=10):
 #     print(dialog.name, dialog.draft.text)
 
-channel = client.get_entity(tgconf.test_channel)
-print(channel.title)
+chat = client.get_entity(tgconf.test_chat)
+print(chat.title)
 
-download_path = '/home/xypnox/Downloads/' + channel.title + '/'
+download_path = '/home/xypnox/Downloads/' + chat.title + '/'
 
 if not os.path.exists(download_path):
     os.makedirs(download_path)
 
 # Get messages
-msgs = client.get_messages(tgconf.test_channel, limit=100)
+msgs = client.get_messages(tgconf.test_chat, limit=100)
 
 count = 0
 
