@@ -4,6 +4,8 @@ from telethon import TelegramClient, sync
 from telethon.tl import types
 import sys
 import os
+import argparse
+import socks
 
 
 def query_yes_no(question, default="yes"):
@@ -67,37 +69,42 @@ def download(msgs, dp):
                 print(msg.id, "Already Present")
 
 
-# Start the client
-client = TelegramClient('xypnox', tgconf.app_id, tgconf.api_hash)
-client.start()
-me = client.get_me()
-print("Hi, ", me.first_name, "Welcome to this world")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--conf', '-c')
+    # Start the client
+    client = TelegramClient('xypnox', tgconf.app_id, tgconf.api_hash, 
+                proxy=(socks.HTTP, '172.16.2.30', 8080)
+            )
+    client.start()
+    me = client.get_me()
+    print("Hi, ", me.first_name, "Welcome to this world")
 
-# This is a joke, ignore this line
-client.send_message('evi1haxor', "This is a telethon test")
+    # This is a joke, ignore this line
+    client.send_message('evi1haxor', "This is a telethon test")
 
-for entry in tgconf.chats:
-    chat = client.get_entity(entry)
+    for entry in tgconf.chats:
+        chat = client.get_entity(entry)
 
-    download_path = os.path.expanduser('~') + '/Downloads/' + chat.title + '/'
+        download_path = os.path.expanduser('~') + '/Downloads/' + chat.title + '/'
 
-    if not os.path.exists(download_path):
-        os.makedirs(download_path)
+        if not os.path.exists(download_path):
+            os.makedirs(download_path)
 
-    # Get messages
-    msgs = client.get_messages(entry, limit=100)
+        # Get messages
+        msgs = client.get_messages(entry, limit=None)
 
-    # Count the number of messages with media
-    count = 0
-    for msg in msgs.data:
-        if hasattr(msg, 'media') and msg.media is not None:
-            count += 1
-    print(chat.title, " has Total Messages with media = ", count)
+        # Count the number of messages with media
+        count = 0
+        for msg in msgs.data:
+            if hasattr(msg, 'media') and msg.media is not None:
+                count += 1
+        print(chat.title, " has Total Messages with media = ", count)
 
-    answer = query_yes_no("Do you want to download these files?")
+        answer = query_yes_no("Do you want to download these files?")
 
-    if answer is True:
-        print("Downloading...")
-        download(msgs, download_path)
-        print("Wow such speed much style")
-client.disconnect()
+        if answer is True:
+            print("Downloading...")
+            download(msgs, download_path)
+            print("Wow such speed much style")
+    client.disconnect()
