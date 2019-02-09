@@ -7,4 +7,52 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 """
+from math import ceil
 
+# from multiprocessing.dummy import Pool as ThreadPool 
+
+def get_factors(n):
+    factors = [1]
+    for i in range(2, ceil(n**(1/2))):
+        if n % i == 0:
+            factors.append(int (i))
+            factors.append(int (n/i))
+    factors.sort()
+    return factors
+
+
+def is_abundant(n):
+    if sum(get_factors(n)) > n:
+        return True
+    return False
+
+abundant = []
+
+for n in range(1, 28123):
+    if is_abundant(n):
+        abundant.append(n)
+
+print(abundant)
+
+add_perms = set([])
+
+for i in abundant:
+    for j in abundant:
+        add_perms.add(i+j)
+        if i + j > 28123:
+            break
+
+print("Calculated Permuations")
+print(len(add_perms))
+
+results = []
+sumX = 0
+for n in range(28123):
+    if n not in add_perms:
+        results.append(n)
+        sumX += n
+
+# pool = ThreadPool(200)
+# results = pool.map(check, range(1, 28123))
+
+print(results, sumX)
