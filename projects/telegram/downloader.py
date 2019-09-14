@@ -35,11 +35,13 @@ def query_yes_no(question, default="yes"):
         elif choice in valid:
             return valid[choice]
         else:
-            sys.stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
+            sys.stdout.write(
+                "Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
 
 
 def download(msgs, dp):
-    for msg in msgs.data:
+    # print(msgs)
+    for msg in msgs:
         if not hasattr(msg, 'media') or msg.media is None:
             continue
 
@@ -73,20 +75,21 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--conf', '-c')
     # Start the client
-    client = TelegramClient('xypnox', tgconf.app_id, tgconf.api_hash, 
-                proxy=(socks.HTTP, '172.16.2.30', 8080)
-            )
+    client = TelegramClient('xypnox', tgconf.app_id, tgconf.api_hash,
+                            proxy=(socks.HTTP, '172.16.2.30', 8080)
+                            )
     client.start()
     me = client.get_me()
     print("Hi, ", me.first_name, "Welcome to this world")
 
     # This is a joke, ignore this line
-    client.send_message('evi1haxor', "This is a telethon test")
+    # client.send_message('evi1haxor', "This is a telethon test")
 
     for entry in tgconf.chats:
         chat = client.get_entity(entry)
 
-        download_path = os.path.expanduser('~') + '/Downloads/' + chat.title + '/'
+        download_path = os.path.expanduser(
+            '~') + '/Downloads/' + chat.title + '/'
 
         if not os.path.exists(download_path):
             os.makedirs(download_path)
@@ -96,7 +99,7 @@ if __name__ == "__main__":
 
         # Count the number of messages with media
         count = 0
-        for msg in msgs.data:
+        for msg in msgs:
             if hasattr(msg, 'media') and msg.media is not None:
                 count += 1
         print(chat.title, " has Total Messages with media = ", count)
