@@ -6,6 +6,7 @@ import sys
 import os
 import argparse
 import socks
+from time import sleep
 
 
 def query_yes_no(question, default="yes"):
@@ -41,9 +42,16 @@ def query_yes_no(question, default="yes"):
 
 def download(msgs, dp):
     # print(msgs)
+    wait = 0
     for msg in msgs:
         if not hasattr(msg, 'media') or msg.media is None:
             continue
+
+        # if wait > 100:
+        #     print("Dozing off")
+        #     sleep(60)
+        #     print("We are back")
+        #     wait = 0
 
         elif hasattr(msg.media, 'document'):
             # Get the filename
@@ -56,6 +64,7 @@ def download(msgs, dp):
                 print(msg.id, " Downloaded as : ", file_name)
 
             else:
+                wait += 1
                 print(msg.id, "Already Present")
 
         elif hasattr(msg.media, 'photo'):
@@ -68,6 +77,7 @@ def download(msgs, dp):
                 msg.download_media(file_name)
                 print(msg.id, "Downloaded as : ", file_name)
             else:
+                wait += 1
                 print(msg.id, "Already Present")
 
 
