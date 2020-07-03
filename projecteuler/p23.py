@@ -8,23 +8,35 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 """
 from math import ceil
+import math
 
-# from multiprocessing.dummy import Pool as ThreadPool 
+# from multiprocessing.dummy import Pool as ThreadPool
 
-def get_factors(n):
-    factors = [1]
-    for i in range(2, ceil(n**(1/2))):
-        if n % i == 0:
-            factors.append(int (i))
-            factors.append(int (n/i))
-    factors.sort()
-    return factors
+
+def get_factors(num):
+    if num == 1:
+        return 1
+    n = math.ceil(math.sqrt(num))
+    total = 1
+    divisor = 2
+    while (divisor < n):
+        if (num % divisor == 0):
+            total += divisor
+            total += num//divisor
+        divisor += 1
+    if n**2 == num:
+        total += n
+    return total
+
+
+print(get_factors(12))
 
 
 def is_abundant(n):
-    if sum(get_factors(n)) > n:
+    if get_factors(n) > n:
         return True
     return False
+
 
 abundant = []
 
@@ -38,21 +50,21 @@ add_perms = set([])
 
 for i in abundant:
     for j in abundant:
-        add_perms.add(i+j)
         if i + j > 28123:
             break
+        add_perms.add(i+j)
 
 print("Calculated Permuations")
-print(len(add_perms))
+print(len(add_perms), add_perms)
 
 results = []
 sumX = 0
-for n in range(28123):
+for n in range(1, 28123):
     if n not in add_perms:
         results.append(n)
         sumX += n
 
-# pool = ThreadPool(200)
-# results = pool.map(check, range(1, 28123))
+# # pool = ThreadPool(200)
+# # results = pool.map(check, range(1, 28123))
 
-print(results, sumX)
+print(results, sumX, sum(results))
