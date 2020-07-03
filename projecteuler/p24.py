@@ -10,20 +10,17 @@ import math
 
 
 def getPerm(n=10 ** 6, a=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]):
-    nn = n
-
     if len(a) == 0:
         return ''
-    l = len(a)
+
+    fac = math.factorial(len(a) - 1)
 
     for num in a:
-        print(num, l-1, math.factorial(l - 1), nn)
-        if math.factorial(l - 1) >= nn:
+        if fac >= n:
             a.remove(num)
-            print('Found digit: ', num, a, nn)
-            return int(str(num) + str(getPerm(nn, a)))
+            return int(str(num) + str(getPerm(n, a)))
         else:
-            nn -= math.factorial(l - 1)
+            n -= fac
 
 
 print(getPerm())
