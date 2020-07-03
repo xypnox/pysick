@@ -13,23 +13,18 @@ import math
 # from multiprocessing.dummy import Pool as ThreadPool
 
 
-def get_factors(num):
-    if num == 1:
+def get_factors(x):
+    if x == 1:
         return 1
-    n = math.ceil(math.sqrt(num))
-    total = 1
-    divisor = 2
-    while (divisor < n):
-        if (num % divisor == 0):
-            total += divisor
-            total += num//divisor
-        divisor += 1
-    if n**2 == num:
-        total += n
-    return total
-
-
-print(get_factors(12))
+    fs = [1]
+    for i in range(2, math.ceil(x**(1/2))):
+        if x % i == 0:
+            fs.append(int(i))
+            fs.append(int(x/i))
+    if math.ceil(x**(1/2))**2 == x:
+        fs.append(int(x**(1/2)))
+    fs.sort()
+    return sum(fs)
 
 
 def is_abundant(n):
@@ -44,7 +39,7 @@ for n in range(1, 28123):
     if is_abundant(n):
         abundant.append(n)
 
-print(abundant)
+# print(abundant)
 
 add_perms = set([])
 
@@ -54,17 +49,15 @@ for i in abundant:
             break
         add_perms.add(i+j)
 
-print("Calculated Permuations")
-print(len(add_perms), add_perms)
+# print("Calculated Permuations")
+# print(len(add_perms), add_perms)
 
-results = []
 sumX = 0
 for n in range(1, 28123):
     if n not in add_perms:
-        results.append(n)
         sumX += n
 
 # # pool = ThreadPool(200)
 # # results = pool.map(check, range(1, 28123))
 
-print(results, sumX, sum(results))
+print(sumX)
